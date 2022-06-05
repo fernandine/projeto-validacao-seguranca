@@ -47,6 +47,7 @@ public class CityControllerIT {
 		adminPassword = "123456";
 	}
 
+	//********Retornar 401 qdo não tem usuário logado*************
 	@Test
 	public void insertShouldReturn401WhenNoUserLogged() throws Exception {
 
@@ -62,6 +63,7 @@ public class CityControllerIT {
 		result.andExpect(status().isUnauthorized());
 	}
 	
+	//********Retornar 403 qdo cliente estiver logado*************
 	@Test
 	public void insertShouldReturn403WhenClientLogged() throws Exception {
 
@@ -80,6 +82,7 @@ public class CityControllerIT {
 		result.andExpect(status().isForbidden());
 	}
 	
+	//*****Inserir recurso quando estiver logado como ADMIN e dados corretos.***********
 	@Test
 	public void insertShouldInsertResourceWhenAdminLoggedAndCorrectData() throws Exception {
 
@@ -99,7 +102,8 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.id").exists());
 		result.andExpect(jsonPath("$.name").value("Recife"));
 	}
-
+	
+		//*********** Retorna 422 quando logado como Admin e nome com espaço em branco;*************
 	@Test
 	public void insertShouldReturn422WhenAdminLoggedAndBlankName() throws Exception {
 
@@ -116,10 +120,11 @@ public class CityControllerIT {
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isUnprocessableEntity());
-		result.andExpect(jsonPath("$.errors[0].fieldName").value("name"));
+		result.andExpect(jsonPath("$.errors[0].fieldName").value("name")); // Mensagem de erro
 		result.andExpect(jsonPath("$.errors[0].message").value("Campo requerido"));
 	}
-
+	
+		//*******Retornar todos os recursos ordenados por nome;***************
 	@Test
 	public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
 		

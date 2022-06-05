@@ -1,8 +1,8 @@
 package com.devsuperior.bds04.tests;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -44,3 +44,4 @@ public class TokenUtil {
 		return jsonParser.parseMap(resultString).get("access_token").toString();
 	}
 }
+ 
